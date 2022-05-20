@@ -428,3 +428,15 @@ const c: StringNumberBooleans = ["world", 3, true, false, true, false, true];
 function readButtonInput(name: string, version: number, ...input: boolean[]) {
   // ...
 }
+
+function doSomething4(pair: readonly [string, number]) {
+  // ...
+}
+
+let point = [3, 4] as const;
+ 
+function distanceFromOrigin([x, y]: readonly [number, number]) {
+  return Math.sqrt(x ** 2 + y ** 2);
+}
+ 
+distanceFromOrigin(point);
