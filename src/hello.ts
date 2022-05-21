@@ -467,3 +467,43 @@ myGenericNumber.zeroValue = 0;
 myGenericNumber.add = function (x, y) {
   return x + y;
 };
+
+/**
+ * using type parameters in generic constraints
+ */
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+  return obj[key];
+}
+
+const x = { a: 1, b: 2, c: 3, d: 4 };
+getProperty(x, "a"); // okay
+
+/**
+ * using class types in generics by factory design pattern
+ */
+class BeeKeeper {
+  hasMask: boolean = true;
+}
+
+class ZooKeeper {
+  nametag: string = "Mikle";
+}
+
+class Animal {
+  numLegs: number = 4;
+}
+
+class Bee extends Animal {
+  keeper: BeeKeeper = new BeeKeeper();
+}
+
+class Lion extends Animal {
+  keeper: ZooKeeper = new ZooKeeper();
+}
+
+function createInstance<A extends Animal>(c: new () => A): A {
+  return new c();
+}
+
+createInstance(Lion).keeper.nametag;
+createInstance(Bee).keeper.hasMask;
