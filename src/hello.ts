@@ -434,9 +434,36 @@ function doSomething4(pair: readonly [string, number]) {
 }
 
 let point = [3, 4] as const;
- 
+
 function distanceFromOrigin([x, y]: readonly [number, number]) {
   return Math.sqrt(x ** 2 + y ** 2);
 }
- 
+
 distanceFromOrigin(point);
+
+/**
+ * generic types
+ */
+interface GenericIdentityFn<T> {
+  (arg: T): T;
+}
+
+function identity<Type>(arg: Type): Type {
+  return arg;
+}
+
+let myIdentity: GenericIdentityFn<number> = identity;
+
+/**
+ * generic classes
+ */
+class GenericNumber<NumType> {
+  zeroValue: NumType;
+  add: (x: NumType, y: NumType) => NumType;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+myGenericNumber.zeroValue = 0;
+myGenericNumber.add = function (x, y) {
+  return x + y;
+};
