@@ -507,3 +507,18 @@ function createInstance<A extends Animal>(c: new () => A): A {
 
 createInstance(Lion).keeper.nametag;
 createInstance(Bee).keeper.hasMask;
+
+/**
+ * keyof type operator
+ */
+ type Arrayish = { [n: number]: unknown };
+ type A = keyof Arrayish;
+
+ type Mapish = { [k: string]: boolean };
+type M = keyof Mapish;
+
+/**
+ * typeof type operator
+ */
+ type Predicate = (x: unknown) => boolean;
+ type K = ReturnType<Predicate>;
